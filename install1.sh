@@ -20,11 +20,8 @@ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 
-rbenv install 2.5.1
-rbenv global 2.5.1
-
-git -c http.sslVerify=false clone https://galin_princeberk:eQq7Xc4mGPF8@10.10.10.39/galin_princeberk/my-peatio/
-cp -y /home/deploy/my-peatio/* /home/deploy/peatio/current
+rbenv install 2.6.1
+rbenv global 2.6.1
 
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install bundler -v 1.17.0
