@@ -24,7 +24,7 @@ rbenv install 2.6.1
 rbenv global 2.6.1
 
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
-gem install bundler -v 1.17.0
+gem install bundler -v 1.17.2
 rbenv rehash
 read -p "Press [Enter] key to continue..."
 mkdir -p ~/.bitcoin
