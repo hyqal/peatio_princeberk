@@ -2,13 +2,9 @@
 sudo apt-get update
 sudo apt-get upgrade -y
 wget https://gist.githubusercontent.com/scatterp2/3f6b1ae1965de18057a896bedc9a6132/raw/cb230dc8b9cc5dab6da64f7e34cf5e50ae373092/passenger.conf
-wget https://gist.githubusercontent.com/scatterp2/5aab2adb578020f93d0f2146e0aac61b/raw/2b2e5fc7e8a95eea3d4b791217c5d1e5b848cd43/bitcoin.conf
-sudo apt-get remove -y apache2
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev imagemagick gsfonts nodejs nginx-extras redis-server software-properties-common python-software-properties nano dialog vim
-sudo add-apt-repository -y ppa:bitcoin/bitcoin
+sudo apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev imagemagick gsfonts nodejs nginx-extras redis-server software-properties-common python-software-properties nano dialog
 sudo apt-get update
-sudo apt-get install -y bitcoind
 cd
 
 git clone git://github.com/sstephenson/rbenv.git /home/deploy/.rbenv
@@ -20,17 +16,12 @@ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 
-rbenv install 2.6.1
-rbenv global 2.6.1
+rbenv install 2.6.2
+rbenv global 2.6.2
 
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install bundler -v 1.17.2
 rbenv rehash
-read -p "Press [Enter] key to continue..."
-mkdir -p ~/.bitcoin
-cp bitcoin.conf ~/.bitcoin/bitcoin.conf
-dialog --msgbox "enter bitcoind user password settings and save" 10 20
-sudo nano ~/.bitcoin/bitcoin.conf
 
 sudo apt-get update
 sudo apt-get install -y rabbitmq-server
@@ -39,6 +30,7 @@ sudo service rabbitmq-server restart
 wget http://localhost:15672/cli/rabbitmqadmin
 chmod +x rabbitmqadmin
 sudo mv rabbitmqadmin /usr/local/sbin
+
 sudo add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
 sudo apt-get update
 sudo apt-get install -y mysql-server-5.6 redis-server libmysqlclient-dev
@@ -72,12 +64,8 @@ bundle install --without development test --path vendor/bundle
 bundle update
 
 bin/init_config
-dialog --msgbox "enter pusher <US1> settings and save" 10 20
-sudo nano ~/peatio/current/config/application.yml
 dialog --msgbox "enter database password  in settings and save" 10 20
 sudo nano ~/peatio/current/config/database.yml
-dialog --msgbox "enter bitcoind user password settings and :q to save" 10 20
-sudo nano ~/peatio/current/config/currencies.yml
 cd ~/peatio/current/
 sudo /etc/init.d/mysql stop
 sudo /etc/init.d/mysql start
